@@ -19,6 +19,7 @@ def get_jobs(job_field, num_jobs=5, slp_time=5, debug=False, max_num_jobs=False)
     jobs = []
     for _ in range(num_jobs):
         print(f'Processing {_ + 1}/{num_jobs}')
+
         if (_ + 1) % 30 == 1:
             driver.find_element(by=By.XPATH,
                                 value='/html/body/div[3]/div[1]/div[3]/div[2]/div[1]/div[2]/div/button').click()
@@ -123,12 +124,13 @@ def get_jobs(job_field, num_jobs=5, slp_time=5, debug=False, max_num_jobs=False)
                      "Industry": industry,
                      "Sector": sector,
                      "Revenue": revenue})
+
+        df = pd.DataFrame(jobs)
+        df.to_excel('glassdoor-datascience-jobs.xlsx', index=False)
+
     driver.quit()
 
     return jobs
 
 
-scraped_jobs = get_jobs('Data Science', max_num_jobs=True)
-
-df = pd.DataFrame(scraped_jobs)
-df.to_excel('glassdoor-datascience-jobs.xlsx', index=False)
+get_jobs('Data Science', num_jobs=9000)
