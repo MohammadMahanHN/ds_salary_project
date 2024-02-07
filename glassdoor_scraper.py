@@ -126,11 +126,8 @@ def get_jobs(job_field, num_jobs=5, slp_time=5, debug=False, max_num_jobs=False)
                      "Revenue": revenue})
 
         df = pd.DataFrame(jobs)
-        df.to_excel('glassdoor-datascience-jobs.xlsx', index=False)
+        df.to_excel('glassdoor-datascience-jobs.csv', index=False)
 
     driver.quit()
 
     return jobs
-
-
-get_jobs('Data Science', num_jobs=9000)
